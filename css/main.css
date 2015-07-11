@@ -1,6 +1,9 @@
 .container {
   margin-top: 100px;
 }
+img {
+  width: 100%;
+}
 .navbar-toggle,
 .navbar-btn,
 .navbar,
