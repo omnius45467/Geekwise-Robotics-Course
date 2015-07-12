@@ -1,4 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Ubuntu:300,400|Ubuntu+Condensed);
+pre,
+code,
 .navbar-toggle,
 .navbar-btn,
 .navbar,
@@ -23,6 +25,8 @@ input,
   border: 0;
   box-shadow: 0;
 }
+pre,
+code,
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
@@ -39,6 +43,10 @@ a,
 }
 img {
   width: 100%;
+}
+pre,
+code {
+  margin: 20px;
 }
 body h1,
 body h2,
@@ -70,6 +78,9 @@ body ul li a ul li ul li,
 body ul li p ul li ul li {
   font-size: 1.3em;
   font-family: 'Ubuntu Condensed', sans-serif;
+}
+body ul #content {
+  margin: 30px;
 }
 body footer {
   background: #333;

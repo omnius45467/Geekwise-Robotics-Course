@@ -89,19 +89,135 @@
                 <p>The way you get the code onto the board is by click the upload button next to the verify button.</p>
             </li>
             <li>
-                <p>Never mistreat your robot! They will seek revenge.</p>
+                <p>You can see that the code has been uploaded by the black console at the bottom of the IDE.</p>
             </li>
         </ul>
     </div>
     <div class="col-md-6">
         <img src="img/arduino-ide-layout.png" alt=""/>
+        <img src="img/arduino-ide-serial-port.png" alt=""/>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Basic Code:</h2>
+        <p>This is where things get a little tricky</p>
+        <ul>
+            <li>
+                <p>Arduino Basic Code Template</p>
+                <pre>
+                    <code>
+void setup() {
+// put your setup code here, to run once:
+
+}
+
+void loop() {
+// put your main code here, to run repeatedly:
+
+}
+                    </code>
+                </pre>
+            </li>
+            <li>
+                <p>The way you set variables</p>
+                <pre>
+                    <code>
+// These constants won't change:
+const int analogPin = A0;    // pin that the sensor is attached to
+const int ledPin = 13;       // pin that the LED is attached to
+const int threshold = 400;   // an arbitrary threshold level that's in the range of the analog input
+                    </code>
+                </pre>
+            </li>
+            <li>
+                <p>Open a basic code example by clicking File/Examples/Basic/Blink</p>
+                <p>This is the basic code for one of your first programs</p>
+                <pre>
+                    <code>
+void setup() {
+// initialize digital pin 13 as an output.
+pinMode(13, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+digitalWrite(13, HIGH);   // turn the LED on
+delay(1000);              // wait for a second
+digitalWrite(13, LOW);    // turn the LED off
+delay(1000);              // wait for a second
+}
+                    </code>
+                </pre>
+            </li>
+            <li>
+                <p>
+                    The Arduino if statement
+                </p>
+                <pre>
+                    <code>
+// These constants won't change:
+const int analogPin = A0;    // pin that the sensor is attached to
+const int ledPin = 13;       // pin that the LED is attached to
+const int threshold = 400;   // an arbitrary threshold level that's in the range of the analog input
+
+void setup() {
+// initialize the LED pin as an output:
+pinMode(ledPin, OUTPUT);
+// initialize serial communications:
+Serial.begin(9600);
+}
+
+void loop() {
+// read the value of the potentiometer:
+int analogValue = analogRead(analogPin);
+
+// if the analog value is high enough, turn on the LED:
+if (analogValue > threshold) {
+digitalWrite(ledPin, HIGH);
+}
+else {
+digitalWrite(ledPin, LOW);
+}
+
+// print the analog value:
+Serial.println(analogValue);
+delay(1);        // delay in between reads for stability
+}
+                    </code>
+                </pre>
+            </li>
+
+        </ul>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
-        
+        <h2>
+            If you want to take it further...
+            
+        </h2>
+        <ul>
+            <li>
+                <p>Make a program that turns on a light(LED) off and on every 5 seconds</p>
+            </li>
+            <li>
+                <p>Make a program that turns a light on every 10 milliseconds</p>
+            </li>
+            <li>
+                <p>Make a program that turns on a light randomly</p>
+                <pre>
+                    <code>
+// print a random number from 0 to 299
+randNumber = random(300);
+Serial.println(randNumber);
+                    </code>
+                </pre>
+            </li>
+        </ul>
     </div>
     <div class="col-md-6">
-        
+        <img src="img/arduino-types.png" alt=""/>
     </div>
 </div>
