@@ -1,16 +1,152 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-12">
-            <h1>Day 2 || Why Does It Work?:</h1>
-        </div>
+
+        <h1>Day 2 || Why Does It Work?:</h1>
+
         <div class="col-md-6">
-            
+            <img src="img/nasa-robot.jpg" alt=""/>
         </div>
         <div class="col-md-6">
             <p>
-                01110011 01101011 01111001 01101110 01100101 01110100 00100000 01101001 01110011 00100000 01101111 01101110 01101100 01101001 01101110
+                01110011 01101011 01111001 01101110 01100101 01110100 00100000 01101001 01110011 00100000 01101111
+                01101110 01101100 01101001 01101110
             </p>
         </div>
-        http://arduino-info.wikispaces.com/ArduinoPinCurrent
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>Safety Review:</h2>
+            <p>What are the main rules you must follow when building a robot, and why?</p>
+        </div>
+        <div class="col-md-6">
+            <img src="img/arduino-types.png" alt=""/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Let's look at power</h2>
+        <p>Power isn't that complicated, but you need to know what different things on the Arduino board mean.</p>
+        <ul>
+            <li>
+                <p>This boring video has something good to say about what is causing everything to work.</p>
+            </li>
+            <li>
+                <p>Pay attention to the safety sections.</p>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <iframe width="480" height="320" src="https://www.youtube.com/embed/undefined" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>
+                Code Review:
+            </h2>
+            <p>Let's go over the basic parts of Arduino code again</p>
+            <ul>
+                <li>
+                    <p>Basic structure</p>
+                    <p>Like in the picture what makes up the basic structure of an Arduino program?</p>
+                </li>
+                <li>
+                    <p>Constant Variables</p>
+                    <p>These go near the top of the program</p>
+                    <pre>
+                        <code>
+// These constants won't change:
+const int analogPin = A0;
+const int ledPin = 13;
+const int threshold = 400;
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    <p>
+                        If Statements
+                    </p>
+                    <p>
+                        Of course this bit of code needs to be inside a loop
+                    </p>
+                    <pre>
+                        <code>
+// if the analog value is high enough, turn on the LED:
+if (analogValue > threshold) {
+digitalWrite(ledPin, HIGH);
+}
+else {
+digitalWrite(ledPin, LOW);
+}
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <img src="img/arduino-simple-program.png" alt=""/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <img src="img/arduino-serial-output.jpg" alt=""/>
+        </div>
+        <div class="col-md-6">
+            <h2>
+                Let's make the Arduino display something:
+            </h2>
+            <ul>
+                <p>We are going to experiment with the Serial monitor</p>
+                <li>
+                    <p>First we are going to code a little bit to display some text on the serial monitor.</p>
+                </li>
+                <li>
+                    <p>Next let's compile and upload it to the board.</p>
+                </li>
+                <li class="text-success">
+                    <p>Finally if all the code checks out then we will be able to run the code. If it uploaded correctly we should be able to click the serial monitor on the top right and see the output.</p>
+                </li>
+                <li class="text-danger">
+                    <p>If you encounter problems...</p>
+                    <ul>
+                        <li>
+                            <p>Check to see that you are on the right serial port</p>
+                        </li>
+                        <li>
+                            <p>Check and see if you have the right board selected</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>
+            We can make other awesome displays with characters.
+        </h2>
+        <ul>
+            <li>
+                <p>Make a new program and save it as <span class="text-info">"Serial_Drawing.ino"</span></p>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                
+            </li>
+        </ul>
     </div>
 </div>

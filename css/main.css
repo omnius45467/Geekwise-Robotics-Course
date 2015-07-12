@@ -57,6 +57,9 @@ body h6,
 body .btn {
   font-family: 'Ubuntu Mono', serif;
 }
+body nav {
+  padding: 10px;
+}
 body a,
 body p {
   padding: 10px;
