@@ -85,6 +85,9 @@ body ul li p ul li ul li {
 body ul #content {
   margin: 30px;
 }
+body ul #content iframe {
+  margin: 30px;
+}
 body footer {
   background: #333;
   color: #fff;

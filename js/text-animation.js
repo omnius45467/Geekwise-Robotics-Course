@@ -3,18 +3,18 @@
 }(jQuery));
 $(document).ready( function(){
     setTimeout( function(){
-        $('.terminal').typewriting( "LOADING>>>", {
+        $('.terminal').typewriting( "UNDER CONSTRUCTION>>>>>>>>>>>>>>>>>>>>>>>>", {
             "typing_interval": 200,
             "blink_interval": "0.5s",
             "cursor_color": "#447799"
         }, function() {
             console.log( "END" );
         });
-        setTimeout( function(){
-            $('.terminal').rewrite( ">>>>>>>>>>", function(){
-                console.log( "END, 2." );
-            });
-        }, 3300);
+        //setTimeout( function(){
+        //    $('.terminal').rewrite( ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", function(){
+        //        console.log( "END, 2." );
+        //    });
+        //}, 3300);
     }, 1000);
 });
 
