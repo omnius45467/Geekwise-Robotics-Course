@@ -130,23 +130,106 @@ digitalWrite(ledPin, LOW);
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6 col-md-offset-3">
         <h2>
-            We can make other awesome displays with characters.
+            Let's learn something new!
         </h2>
         <ul>
             <li>
-                <p>Make a new program and save it as <span class="text-info">"Serial_Drawing.ino"</span></p>
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
+                <p>This is an example of the "C" programming language <i>for loop</i>...</p>
+                <p>Boilerplate example:</p>
+                <pre>
+                    <code>
+for(int a = 0; a < 8; a++){
+Serial.println(a);
+}
+                    </code>
+                </pre>
+                <p>Use case example:</p>
+                <pre>
+                    <code>
+for (int thisPin = 2; thisPin < 8; thisPin++)  {
+pinMode(thisPin, OUTPUT);
+}
+                    </code>
+                </pre>
             </li>
         </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <img src="img/cylon.jpg" alt=""/>
+    </div>
+    <div class="col-md-6 ">
+        <h2>
+            Cylon Eyes:
+        </h2>
+        <p>A similar example can be found <a href="https://www.arduino.cc/en/Tutorial/ForLoop" target="_blank">here...</a></p>
+        <ul>
+            <li>
+                <p>Make a new program and save it as <span class="text-info">"cylon_eyes.ino"</span></p>
+            </li>
+            <li>
+                <p>We will use the <i>for loops</i> above to construct a robot "looking" eye. </p>
+                <pre>
+                    <code>
+
+int timer = 100;
+
+void setup() {
+Serial.begin(9600);
+// use a for loop to initialize each pin as an output:
+for (int thisPin = 2; thisPin < 8; thisPin++) {
+pinMode(thisPin, OUTPUT);
+}
+}
+
+void loop() {
+// loop from the lowest pin to the highest:
+for (int thisPin = 2; thisPin < 8; thisPin++) {
+// turn the pin on:
+digitalWrite(thisPin, HIGH);
+Serial.print(thisPin);
+Serial.println();
+delay(timer);
+// turn the pin off:
+digitalWrite(thisPin, LOW);
+}
+
+// loop from the highest pin to the lowest:
+for (int thisPin = 7; thisPin >= 2; thisPin--) {
+// turn the pin on:
+digitalWrite(thisPin, HIGH);
+Serial.print(thisPin);
+Serial.println();
+delay(timer);
+                        
+// turn the pin off:
+digitalWrite(thisPin, LOW);
+}
+}
+                    </code>
+                </pre>
+                <p>We need to "map" the LED's to special digital pins on the Arduino board. Remember that if you don't connect a resistor ro the setup you can fry the LED or the board!</p>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Can you follow this schematic?</h2>
+        <img src="img/cylon_eyes_scymatic.png" alt=""/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>
+            These <i>for loops</i> are important for later when we are working with multiple sensors! Can you think of any other uses?
+        </h2>
+    </div>
+    <div class="col-md-6">
+        
     </div>
 </div>
