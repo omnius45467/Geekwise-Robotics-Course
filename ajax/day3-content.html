@@ -1,5 +1,166 @@
 <div class="row">
     <div class="col-md-12">
+        <h1>Day 3 || The World of Sensors:</h1>
 
+        <div class="col-md-6">
+            <img src="img/arduino-sensors-group.png" alt=""/>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Thank you... motion sensor hand towel machine. You never work, so I just end up looking like I'm waving hello to a wall robot. --Jimmy Fallon
+
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>You robot needs eyes to be able to see the world around it.</h2>
+            <p>Today we will be looking into what will make the robot have a sense of the world around it.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <img src="img/Ultrasonic_4.png" alt=""/>
+    </div>
+    <p>The ultrasonic sensor is an interesting piece of technology. It sends out a signal and waits for a response. If there is no response received it will just continue looking. If there is a response the sensor will send an "integer value" and you can then use it in your code!</p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>First We need to setup some new variables that we can use in the sensor program</h2>
+            <pre>
+                <code>
+// this constant won't change.  It's the pin number
+// of the sensor's output:
+const int LED = 13;
+const int pingVcc = 4;
+const int pingTrig = 5;
+const int pingEcho = 6;
+const int pingGnd = 7;
+
+// establish variables for duration of the ping,
+// and the distance result in inches and centimeters:
+long duration, inches, cm;
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>The ultrasonic sensor needs to be broken into a few different sections. The first is the main part of the function.</h2>
+
+            <pre>
+                <code>
+void ping(){
+pinMode(pingVcc, OUTPUT);
+pinMode(pingGnd, OUTPUT);
+digitalWrite(pingVcc, HIGH);
+// The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
+// Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
+pinMode(pingTrig, OUTPUT);
+digitalWrite(pingTrig, LOW);
+delayMicroseconds(2);
+digitalWrite(pingTrig, HIGH);
+delayMicroseconds(5);
+digitalWrite(pingTrig, LOW);
+
+// The same pin is used to read the signal from the PING))): a HIGH
+// pulse whose duration is the time (in microseconds) from the sending
+// of the ping to the reception of its echo off of an object.
+pinMode(pingEcho, INPUT);
+duration = pulseIn(pingEcho, HIGH);
+
+// convert the time into a distance
+inches = microsecondsToInches(duration);
+cm = microsecondsToCentimeters(duration);
+
+Serial.println("Ping ");
+Serial.print(inches);
+Serial.print("in, ");
+Serial.print(cm);
+Serial.print("cm");
+Serial.println();
+
+delay(50);
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>The last bit of code that we need to add to the program is a section to convert the incoming data into something we can use. This isn't that complex but we need to "return" useful data so we can use it to make the robot move!</h2>
+        <p>This bit of code converts the incoming data into cm and inches</p>
+        <pre>
+            <code>
+//distance measurments
+long microsecondsToInches(long microseconds){
+// According to Parallax's datasheet for the PING))), there are
+// 73.746 microseconds per inch (i.e. sound travels at 1130 feet per
+// second).  This gives the distance travelled by the ping, outbound
+// and return, so we divide by 2 to get the distance of the obstacle.
+// See: http://www.parallax.com/dl/docs/prod/acc/28015-PING-v1.3.pdf
+return microseconds / 74 / 2;
+}
+
+long microsecondsToCentimeters(long microseconds){
+// The speed of sound is 340 m/s or 29 microseconds per centimeter.
+// The ping travels out and back, so to find the distance of the
+// object we take half of the distance travelled.
+return microseconds / 29 / 2;
+}
+            </code>
+        </pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>Some interesting videos!</h2>
+            <p>Check out what you can make with code similar to the code above!</p>
+            <br/>
+            <p>Can you think of any other possible use cases?</p>
+            <iframe width="420" height="315" src="https://www.youtube.com/embed/xrPiDkLb_2M" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6">
+            
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/v19jxMuqsWI" frameborder="0" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/m1tcAk79b5U" frameborder="0" allowfullscreen></iframe>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>Let's combine some of what we've learned so far!</h2>
+            <p>How can we take the code further? Let's combine the ping sensor with some LED's.</p>
+            <p>Use the code above and add this within the loop.</p>
+            <pre>
+                <code>
+ping();
+if(cm > 20){
+digitalWrite(LED, HIGH);                    
+}else{
+digitalWrite(LED, LOW);                    
+}                    
+                </code>
+            </pre>
+
+        </div>
+        <div class="col-md-6">
+            <h2>If you want to combine everything and make a range finder with LED's.</h2>
+            <p>You can do something similar to what we did yesterday!</p>
+            <p>Check this out! <a href="http://www.instructables.com/id/Distance-Sensor-with-LEDs-and-buzzer/">Instructables</a></p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>If there is enough time we will try and combine the sensor with a DC motor.</p>
     </div>
 </div>
