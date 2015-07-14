@@ -83,12 +83,13 @@ body ul li p ul li ul li {
   font-family: 'Ubuntu Condensed', sans-serif;
 }
 body ul #content {
-  margin: 30px;
+  padding-bottom: 300px;
 }
 body ul #content iframe {
   margin: 30px;
 }
 body footer {
-  background: #333;
+  background: transparent;
   color: #fff;
+  height: 500px;
 }
