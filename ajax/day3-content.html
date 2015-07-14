@@ -33,6 +33,7 @@
                 <code>
 // this constant won't change.  It's the pin number
 // of the sensor's output:
+const int LED = 13;
 const int pingVcc = 4;
 const int pingTrig = 5;
 const int pingEcho = 6;
@@ -137,17 +138,29 @@ return microseconds / 29 / 2;
     <div class="col-md-12">
         <div class="col-md-6">
             <h2>Let's combine some of what we've learned so far!</h2>
-            <p>How can we take the code further? Let's combine the ping sensor with a DC motor.</p>
+            <p>How can we take the code further? Let's combine the ping sensor with some LED's.</p>
+            <p>Use the code above and add this within the loop.</p>
             <pre>
                 <code>
-                    
+ping();
+if(cm > 20){
+digitalWrite(LED, HIGH);                    
+}else{
+digitalWrite(LED, LOW);                    
+}                    
                 </code>
             </pre>
+
         </div>
         <div class="col-md-6">
             <h2>If you want to combine everything and make a range finder with LED's.</h2>
             <p>You can do something similar to what we did yesterday!</p>
             <p>Check this out! <a href="http://www.instructables.com/id/Distance-Sensor-with-LEDs-and-buzzer/">Instructables</a></p>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>If there is enough time we will try and combine the sensor with a DC motor.</p>
     </div>
 </div>
