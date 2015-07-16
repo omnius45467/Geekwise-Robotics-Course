@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Types of Motor Shields:</h2>
-        <p>There are hundreds of different types of motor shields, here are a couple...</p>
+        <p>There are hundreds of different types of motor shields/drivers, here are a couple...</p>
 
         <div class="col-md-3">
             <img src="img/MotorShield_R3_Front.jpg.jpg" alt=""/>
@@ -35,7 +35,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h2>Learning how to connect the motor shield:</h2>
+        <h2>Learning how to connect the motor driver:</h2>
         <p>We need to tell the Arduino that the motors are connected and what to do with them through "functions".</p>
     </div>
 </div>
@@ -46,7 +46,46 @@
         </div>
         <div class="col-md-6">
             <p>This is our motor shield. This is a complex piece of technology in a small package. That large black thing in the back is a "heat sink" that will keep the chip from over heating.</p>
-            <p></p>
+            <p>You will probably notice that there are some pins like on your Arduino that things can be plugged into. We will use these to "interface" with the hardware.</p>
+            <ul>
+                <li><p>For now the most important parts of this piece of technology are the screw terminals labeled..</p>
+                    <ul>
+                        <li><p>OUT1 || which is where a motor will connect</p></li>
+                        <li><p>OUT2 || which is another place where a motor will connect</p></li>
+                        <li><p>OUT3 || which is another place to connect a motor</p></li>
+                        <li><p>OUT4 || which is the remaining place to connect a motor</p></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
+        <ul class="col-md-6 col-md-offset-3">
+                <li><p>We will also need to setup some pins that will connect the motor driver to the Arduino</p>
+                    <ul>
+                        <li>
+                            <img src="img/basic-motor-wiring.jpg" alt=""/>
+                            <p>Follow the chart above to connect the motor driver to the Arduino</p>
+                        </li>
+                        <li>
+                            <p>The connections on the Arduino should match the pins in this image</p>
+                            <img src="img/RoboRedPinNumbersMD-450.jpg" alt=""/>
+                        </li>
+                        <li>
+                            <p>On the Motor Driver they should look like this...</p>
+                            <img src="img/Motor-Driver-Wiring-200.jpg" style="width:300px;transform: rotate(90deg);" alt=""/>
+                        </li>
+                        <li>
+                            <p>Now take 2 wires from the "rainbow strip" and remove the black covers from only one side.</p>
+                            <p>Plug the other side into the Arduino using the double "teeth" pins.</p>
+                            <p>Plug this setup into the pins labeled "VIN" and "GND"</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Coding the Motor Driver</h2>
     </div>
 </div>
