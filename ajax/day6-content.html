@@ -3,7 +3,7 @@
         <h1>Day 6 || Using The Breadboard With Your Robot:</h1>
 
         <div class="col-md-6">
-            <h2>Not macht erfinderisch.</h2>
+            <h2>Not macht erfinderisch. - that's German</h2>
         </div>
 
         <div class="col-md-6">
@@ -20,19 +20,37 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
-       
+    <div class="col-md-3">
+        <img src="img/bread.jpeg" alt=""/>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-9">
         <h2>Grab your breadboards</h2>
         <p>Today we will be combing the breadboard with LED's, Photoresitors and Buzzers</p>
     </div>
     <div class="col-md-12">
-        <h2>Use this code:</h2>
-        <ul>
-            <li></li>
-            <li></li>
-        </ul>
+        <div class="col-md-6">
+            <h2>Use this code:</h2>
+            <p>Add this to the top of the program</p>
+        <pre>
+            <code>
+int lightPin = 0;  //define a pin for Photo resistor
+int ledPin=12;     //define a pin for LED
+            </code>
+        </pre>
+            <p>Add this below the main loop</p>
+        <pre>
+            <code>
+void loop()
+{
+Serial.println(analogRead(lightPin));
+analogWrite(ledPin, analogRead(lightPin)/4);
+delay(10);
+}
+            </code>
+        </pre>
+        </div>
+        <div class="col-md-6"></div>
+
     </div>
 </div>
 <div class="row">
@@ -43,20 +61,113 @@
             <pre>
 #define  RampDelay  10
 
-#define  StartMoveSpeed    1000  // Motor Driver value for start of motion
+#define  StartMoveSpeed    1000
 
 #define  SlowMoveSpeed     500
-#define  SlowMoveAdjust     5   // Adjust for straight move: - Left + Right??
+#define  SlowMoveAdjust     5
 
 #define  MediumMoveSpeed   650
-#define  MediumMoveAdjust   5  // Adjust for straight move: - Left + Right
+#define  MediumMoveAdjust   5
 
 #define  FastMoveSpeed     1000
-#define  FastMoveAdjust     50  // Adjust for straight move: - Left + Rig
+#define  FastMoveAdjust     50
             </pre>
         </code>
     </div>
     <div class="col-md-6">
+        <img src="img/yourduino-kit.jpg" alt=""/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>If you want to make the robot move faster all around modify the delays in the code.</h2>
+            <p>In the main loop you can change the delay to be lower, so that the robots reaction time will be faster</p>
+        <pre>
+            <code>
+void loop()
+{
+
+EXEC(RoboGo);//run statemachine
+
+delay(10);
+}//--(end main loop )---
+            </code>
+        </pre>
+    
+    </div>
+    <div class="col-md-6">
         
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+            <h2>We can also change the delay in the Machine States</h2>
+            <pre>
+                <code>
+
+                    /**************************( STATE MACHINE FUNCTIONS )******************************/
+                    State RoboStartState()
+                    {
+                    Serial.println("+++ RoboStartState");
+                    digitalWrite(PIN13_LED,LOW);    // LED Means Target Too Close
+                    ForwardFast();  // Start moving forward
+                    delay(25);
+                    ForwardSlow();  // Start moving forward
+                    delay(600);
+                    RoboGo.Set(RoboStopLookState);
+
+                    }// END State RoboStartState
+
+
+                    State RoboStopLookState()
+                    {
+                    Serial.println("+++ RoboStopLookState");
+
+                    for (int i = 0; i < TARGET_ARRAY_SIZE; i++) TargetArray[i] = false;
+                    Stop();  // Start moving forward
+                    LookAround();     // Ping Ultrasonic in different directions, Set TargetArray
+
+                    if      (TargetArray[TARGET_CENTER ] == true)  RoboGo.Set(RoboTargetCenter);
+                    else if (TargetArray[TARGET_LEFT ]   == true)  RoboGo.Set(RoboTargetLeft);
+                    else if (TargetArray[TARGET_RIGHT ]  == true)  RoboGo.Set(RoboTargetRight);
+                    else     RoboGo.Set(RoboStartState);
+
+                    }// END State RoboStartState
+
+
+                    State RoboTargetLeft()
+                    {
+                    Serial.println("***** RoboTargetLeft");
+                    Stop();
+                    BackwardSlow(500);
+                    SpinRight(500);
+                    delay(500);
+                    RoboGo.Set(RoboStartState);
+                    }// END State RoboTargetLeft ----------------------
+
+                    State RoboTargetCenter()
+                    {
+                    Serial.println("***** RoboTargetCenter");
+                    Stop();
+                    BackwardSlow(500);
+                    SpinLeft(1100);
+                    delay(500);
+                    RoboGo.Set(RoboStartState);
+                    } // END State RoboTargetCenter -----------------
+
+                    State RoboTargetRight()
+                    {
+                    Serial.println("***** RoboTargetRight");
+                    Stop();
+                    delay(50);
+                    BackwardSlow(50);
+                    SpinLeft(50);
+                    delay(50);
+                    RoboGo.Set(RoboStartState);
+                    }// END State RoboTargetRight -----------------
+                </code>
+            </pre>
+
     </div>
 </div>
