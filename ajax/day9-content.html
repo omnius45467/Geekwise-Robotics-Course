@@ -1,5 +1,57 @@
 <div class="row">
     <div class="col-md-12">
-
+        <h1>How To Add More... </h1>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Sometimes the best parts for robots, are the parts you already have.</h2>
+    </div>
+    <div class="col-md-6">
+        <img src="img/robotssss.jpg" alt=""/>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <img src="img/motor_setup.jpg" alt=""/>
+    </div>
+    <div class="col-md-6">
+        <h2>We need to find a way to add hardware to the robot.</h2>
+        <p>Here is a simple walk-through.</p>
+        <ul>
+            <li>Look at the item you wish to integrate, try to find any markings that might indicate a serial number or a manufacturing number. </li>
+            <li>Once you have that, try and find the item online through google</li>
+            <li>Most likely the part you are wanting to use might be common, and so they might have power specs online or a diagram of the device. Try and follow what other people have done in the past.</li>
+            <li>Next find the group wire. It should be a black or brown wire. Usually if it is a DC motor both wires can act as the ground.</li>
+            <li>After that find a wire that might be a power supply. You will want to connect the robot power supply to the hardware you want to integrate</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <img src="img/c3po.jpg" alt=""/>
+    </div>
+    <div class="col-md-6">
+        <h2>How to write code for the hardware you want to use.</h2>
+        <pre>
+            <code>
+                int $variable = $variable-pin;
+                pinMode($varaible, OUTPUT);
+                
+                long on($variable){
+                    digitalWrite($variable, HIGH);
+                    delay(50);
+               
+                }
+
+                long off($variable){
+                digitalWrite($variable, LOW);
+                delay(50);
+
+                }
+            </code>
+        </pre>
+    </div>
+</div>
+.row
