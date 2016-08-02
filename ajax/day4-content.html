@@ -111,7 +111,7 @@
         <pre>
 
         <code>
-      #include < Servo.h > //servo library
+#include <Servo.h>; //servo library
 Servo myservo; // create servo object to control servo
 int Echo = A4;
 int Trig = A5;
@@ -122,55 +122,93 @@ int in4 = 9;
 int ENA = 5;
 int ENB = 10;
 int ABS = 110;
-int rightDistance = 0,leftDistance = 0,middleDistance = 0 ;
-void _mForward()
-{
- analogWrite(ENA,ABS);
- analogWrite(ENB,ABS);
- digitalWrite(in1,LOW);
- digitalWrite(in2,HIGH);
- digitalWrite(in3,LOW);
- digitalWrite(in4,HIGH);
- Serial.println("go forward!");
+
+int rightDistance = 0,leftDistance = 0,middleDistance = 0;
+
+void setup() {
+  //servo
+  myservo.attach(3);
+
+
+  //telling the Arduino that these 2 pins are an input and output for the sensors
+  pinMode(Echo, INPUT);
+  pinMode(Trig, OUTPUT);
+
+  //Initalize Motots
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
+
+  //Initalize Serial Monitor
+  Serial.begin(9600);
+
 }
 
-void _mBack()
-{
- analogWrite(ENA,ABS);
- analogWrite(ENB,ABS);
- digitalWrite(in1,HIGH);
- digitalWrite(in2,LOW);
- digitalWrite(in3,HIGH);
- digitalWrite(in4,LOW);
- Serial.println("go back!");
-}
 
-void _mleft()
-{
- analogWrite(ENA,ABS);
- analogWrite(ENB,ABS);
- digitalWrite(in1,LOW);
- digitalWrite(in2,HIGH);
- digitalWrite(in3,HIGH);
- digitalWrite(in4,LOW);
- Serial.println("go left!");
-}
 
-void _mright()
+void loop()
 {
- analogWrite(ENA,ABS);
- analogWrite(ENB,ABS);
- digitalWrite(in1,HIGH);
- digitalWrite(in2,LOW);
- digitalWrite(in3,LOW);
- digitalWrite(in4,HIGH);
- Serial.println("go right!");
-}
-void _mStop()
-{
-  digitalWrite(ENA,LOW);
-  digitalWrite(ENB,LOW);
-  Serial.println("Stop!");
+    myservo.write(90);//setservo position according to scaled value
+    delay(500);
+    middleDistance = Distance_test();
+    #ifdef send
+    Serial.print("middleDistance=");
+    Serial.println(middleDistance);
+    #endif
+
+    if(middleDistance<=40)
+    {
+      _stop();
+      delay(500);
+      myservo.write(5);
+      delay(500);
+      rightDistance = Distance_test();
+
+      #ifdef send
+      Serial.print("rightDistance=");
+      Serial.println(rightDistance);
+      #endif
+
+      delay(500);
+       myservo.write(90);
+      delay(500);
+      myservo.write(180);
+      delay(500);
+      leftDistance = Distance_test();
+
+      #ifdef send
+      Serial.print("leftDistance=");
+      Serial.println(leftDistance);
+      #endif
+
+      delay(500);
+      myservo.write(90);
+      delay(500);
+      if(rightDistance>leftDistance)
+      {
+        _right();
+        delay(180);
+       }
+       else if(rightDistance < leftDistance)
+       {
+        _left();
+        delay(180);
+       }
+       else if((rightDistance<=40)||(leftDistance<=40))
+       {
+        _backward();
+        delay(180);
+       }
+       else
+       {
+        _forward();
+       }
+    }
+    else
+        _forward();
 }
  /*Ultrasonic distance measurement Sub function*/
 int Distance_test()
@@ -185,83 +223,57 @@ int Distance_test()
   return (int)Fdistance;
 }
 
-void setup()
-{
-  myservo.attach(3);// attach servo on pin 3 to servo object
-  Serial.begin(9600);
-  pinMode(Echo, INPUT);
-  pinMode(Trig, OUTPUT);
-  pinMode(in1,OUTPUT);
-  pinMode(in2,OUTPUT);
-  pinMode(in3,OUTPUT);
-  pinMode(in4,OUTPUT);
-  pinMode(ENA,OUTPUT);
-  pinMode(ENB,OUTPUT);
-  _mStop();
+void _forward(){
+  //the motors themselves
+  digitalWrite(ENA,HIGH);
+  digitalWrite(ENB,HIGH);
+  digitalWrite(in1,LOW);//digital output
+  digitalWrite(in2,HIGH);
+  digitalWrite(in3,LOW);
+  digitalWrite(in4,HIGH);
+  Serial.println("Forward");
 }
 
-void loop()
-{
-    myservo.write(90);//setservo position according to scaled value
-    delay(500);
-    middleDistance = Distance_test();
-    #ifdef send
-    Serial.print("middleDistance=");
-    Serial.println(middleDistance);
-    #endif
-
-    if(middleDistance<=20)
-    {
-      _mStop();
-      delay(500);
-      myservo.write(5);
-      delay(1000);
-      rightDistance = Distance_test();
-
-      #ifdef send
-      Serial.print("rightDistance=");
-      Serial.println(rightDistance);
-      #endif
-
-      delay(500);
-       myservo.write(90);
-      delay(1000);
-      myservo.write(180);
-      delay(1000);
-      leftDistance = Distance_test();
-
-      #ifdef send
-      Serial.print("leftDistance=");
-      Serial.println(leftDistance);
-      #endif
-
-      delay(500);
-      myservo.write(90);
-      delay(1000);
-      if(rightDistance>leftDistance)
-      {
-        _mright();
-        delay(180);
-       }
-       else if(rightDistance < leftDistance)
-       {
-        _mleft();
-        delay(180);
-       }
-       else if((rightDistance<=20)||(leftDistance<=20))
-       {
-        _mBack();
-        delay(180);
-       }
-       else
-       {
-        _mForward();
-       }
-    }
-    else
-        _mForward();
+void _backward(){
+  digitalWrite(ENA,HIGH);
+  digitalWrite(ENB,HIGH);
+  digitalWrite(in1,HIGH);
+  digitalWrite(in2,LOW);
+  digitalWrite(in3,HIGH);
+  digitalWrite(in4,LOW);
+  Serial.println("Back");
 }
 
+void _left(){
+  digitalWrite(ENA,HIGH);
+  digitalWrite(ENB,HIGH);
+  digitalWrite(in1,LOW);
+  digitalWrite(in2,HIGH);
+  digitalWrite(in3,HIGH);
+  digitalWrite(in4,LOW);
+  Serial.println("Left");
+}
+
+void _right(){
+  digitalWrite(ENA,HIGH);
+  digitalWrite(ENB,HIGH);
+  digitalWrite(in1,HIGH);
+  digitalWrite(in2,LOW);
+  digitalWrite(in3,LOW);
+  digitalWrite(in4,HIGH);
+  Serial.println("Right");
+}
+void _stop(){
+    //the motors themselves
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+
+  //the power controls
+  digitalWrite(ENA, LOW);
+  digitalWrite(ENB, LOW);
+}
         </code>
 
         </pre>
