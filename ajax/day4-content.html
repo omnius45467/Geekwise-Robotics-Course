@@ -282,23 +282,122 @@ void _stop(){
 </div>
 <div class="row">
     <div class="col-md-12">
-        <!--<h2>To get this code to work we need to install things called code "libraries".</h2>-->
-        <!--<p>Here is a detailed tutorial on how to install libraries. <a-->
-                <!--href="http://arduino-info.wikispaces.com/Arduino-Libraries">Here</a></p>-->
-        <!--<div class="col-md-6">-->
-            <!--<img src="img/Arduino-AddLibrary.jpg" alt=""/>-->
-        <!--</div>-->
-        <!--<ul class="col-md-6">-->
-            <!--<li>-->
-                <!--<a href="https://code.google.com/p/arduino-new-ping/downloads/detail?name=NewPing_v1.5.zip&can=2&q=">New-->
-                    <!--Ping Library</a>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<a href="http://playground.arduino.cc/Code/SMlib">SM Library</a>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<a href="http://arduino-info.wikispaces.com/Arduino-Libraries#ydlibs">All major YourDuino Libraries</a>-->
-            <!--</li>-->
-        <!--</ul>-->
+        <h2>IR Control!</h2>
+        <p>Use the following code as a starting point to create a control system for your robot.</p>
+        <pre>
+            <code>
+                 #include <IRremote.h>
+ int receiverpin = 12;
+ int in1=6;
+ int in2=7;
+ int in3=8;
+ int in4=9;
+ int ENA=5;
+ int ENB=10;
+ int ABS=130;
+ unsigned long RED;
+  #define A 16736925
+  #define B 16754775
+  #define X 16712445
+  #define C 16720605
+  #define D 16761405
+  IRrecv irrecv(receiverpin);
+ decode_results results;
+ void _mForward()
+ {
+ digitalWrite(ENA,HIGH);
+ digitalWrite(ENB,HIGH);
+ digitalWrite(in1,LOW);
+ digitalWrite(in2,HIGH);
+ digitalWrite(in3,LOW);
+ digitalWrite(in4,HIGH);
+ Serial.println("go forward!");
+ }
+void _mBack()
+{
+   digitalWrite(ENA,HIGH);
+ digitalWrite(ENB,HIGH);
+ digitalWrite(in1,HIGH);
+ digitalWrite(in2,LOW);
+ digitalWrite(in3,HIGH);
+ digitalWrite(in4,LOW);
+ Serial.println("go back!");
+ }
+void _mleft()
+{
+ analogWrite(ENA,ABS);
+ analogWrite(ENB,ABS);
+ digitalWrite(in1,LOW);
+ digitalWrite(in2,HIGH);
+ digitalWrite(in3,HIGH);
+ digitalWrite(in4,LOW);
+ Serial.println("go left!");
+ }
+void _mright()
+{
+   analogWrite(ENA,ABS);
+ analogWrite(ENB,ABS);
+ digitalWrite(in1,HIGH);
+ digitalWrite(in2,LOW);
+ digitalWrite(in3,LOW);
+ digitalWrite(in4,HIGH);
+ Serial.println("go right!");
+ }
+void _mStop()
+{
+   digitalWrite(ENA,LOW);
+   digitalWrite(ENB,LOW);
+   Serial.println("STOP!");
+ }
+  void setup() {
+ // put your setup code here, to run once:
+ pinMode(in1,OUTPUT);
+ pinMode(in2,OUTPUT);
+ pinMode(in3,OUTPUT);
+ pinMode(in4,OUTPUT);
+ pinMode(ENA,OUTPUT);
+ pinMode(ENB,OUTPUT);
+ pinMode(receiverpin,INPUT);
+ Serial.begin(9600);
+ _mStop();
+ irrecv.enableIRIn();
+  }
+ void loop() {
+ if (irrecv.decode(&results))
+ {
+ RED=results.value;
+ Serial.println(RED);
+ irrecv.resume();
+ delay(150);
+ if(RED==A)
+ {
+ _mForward();
+ delay(100);
+ }
+ else if(RED==B)
+ {
+
+_mBack();
+delay(100);
+ }
+  else if(RED==C)
+ {
+ _mleft();
+ delay(100);
+ }
+ else if(RED==D)
+ {
+ _mright();
+ delay(100);
+ }
+ else if(RED==X)
+ {
+  _mStop();
+  delay(100);
+ }
+ }
+ }
+            </code>
+        </pre>
     </div>
 </div>
